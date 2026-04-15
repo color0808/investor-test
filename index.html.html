@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>投资人格测试 · 16 种投资者类型</title>
+<meta name="description" content="16 道题，测出你属于哪种投资者。4 个维度，16 种类型，没有标准答案。">
+<meta property="og:title" content="投资人格测试">
+<meta property="og:description" content="你是全局猎人、风口冲浪人，还是 K 线神算子？16 道题给你答案。">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --surface-2: #f1efe8;
+  --text: #1a1a1a;
+  --text-2: #5f5e5a;
+  --text-3: #9a9892;
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.18);
+  --accent: #1a1a1a;
+  --serif: 'Georgia', 'Songti SC', 'STSong', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a18;
+    --surface: #242421;
+    --surface-2: #2c2c2a;
+    --text: #f0eee8;
+    --text-2: #a8a6a0;
+    --text-3: #6b6a66;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.18);
+    --accent: #f0eee8;
+  }
+}
+html, body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+body { padding: 24px 16px 40px; line-height: 1.6; }
+.wrap { max-width: 600px; margin: 0 auto; }
+.card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 14px; padding: 28px 24px; }
+.bar { height: 3px; background: var(--surface-2); border-radius: 2px; overflow: hidden; margin-bottom: 20px; }
+.fill { height: 100%; background: var(--accent); transition: width .35s ease; border-radius: 2px; }
+.qn { font-size: 12px; color: var(--text-3); margin-bottom: 8px; letter-spacing: 0.05em; }
+.qt { font-size: 18px; font-weight: 500; line-height: 1.5; margin-bottom: 22px; color: var(--text); }
+.opt { display: block; width: 100%; text-align: left; padding: 16px 18px; margin-bottom: 10px; background: var(--surface); border: 0.5px solid var(--border); border-radius: 10px; font-size: 15px; line-height: 1.5; cursor: pointer; color: var(--text); font-family: inherit; transition: background .15s, border-color .15s, transform .1s; }
+.opt:hover { background: var(--surface-2); border-color: var(--border-strong); }
+.opt:active { transform: scale(0.99); }
+.opt.sel { background: var(--surface-2); border-color: var(--accent); }
+.nav { display: flex; justify-content: space-between; margin-top: 18px; gap: 10px; }
+.nav button { background: transparent; border: 0.5px solid var(--border); padding: 10px 18px; border-radius: 8px; font-size: 14px; cursor: pointer; color: var(--text); font-family: inherit; }
+.nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+.intro h1 { font-size: 26px; font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em; }
+.intro p { font-size: 15px; line-height: 1.75; color: var(--text-2); margin-bottom: 14px; }
+.intro .meta { font-size: 13px; color: var(--text-3); margin-bottom: 24px; }
+.start { background: var(--accent); color: var(--bg); border: none; padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; }
+.start:active { transform: scale(0.98); }
+.code { font-size: 48px; font-weight: 500; letter-spacing: 0.12em; margin-bottom: 4px; line-height: 1; }
+.rname { font-size: 24px; font-weight: 500; margin-bottom: 10px; }
+.rtag { font-size: 16px; color: var(--text-2); margin-bottom: 28px; line-height: 1.6; font-family: var(--serif); font-style: italic; }
+.drow { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 13px; }
+.dl { width: 84px; text-align: right; color: var(--text-3); flex-shrink: 0; }
+.dr { width: 84px; color: var(--text-3); flex-shrink: 0; }
+.dl.act, .dr.act { color: var(--text); font-weight: 500; }
+.dbar { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; position: relative; }
+.dfill { position: absolute; top: 0; height: 100%; background: var(--accent); border-radius: 3px; transition: all .4s; }
+.stitle { font-size: 11px; color: var(--text-3); margin: 24px 0 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+.desc { font-size: 15px; line-height: 1.75; color: var(--text); }
+.actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+.actions button { background: transparent; border: 0.5px solid var(--border-strong); padding: 10px 16px; border-radius: 8px; font-size: 14px; cursor: pointer; color: var(--text); font-family: inherit; flex: 1; min-width: 120px; }
+.actions button.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.footer { text-align: center; margin-top: 24px; font-size: 12px; color: var(--text-3); }
+.toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--bg); padding: 10px 20px; border-radius: 20px; font-size: 14px; opacity: 0; transition: opacity .3s; pointer-events: none; }
+.toast.show { opacity: 1; }
+@media (max-width: 480px) {
+  .card { padding: 22px 18px; }
+  .qt { font-size: 16px; }
+  .opt { padding: 14px 16px; font-size: 14px; }
+  .code { font-size: 40px; }
+  .rname { font-size: 20px; }
+  .dl, .dr { width: 70px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="root"></div>
+  <div class="footer">投资人格测试 · 仅供娱乐</div>
+</div>
+<div class="toast" id="toast">链接已复制</div>
+
+<script>
+const QS = [
+  {d:'MD', q:'周末做研究，你更愿意把时间花在……', a:{t:'读一篇美联储官员讲话和地缘政治长文', v:'M'}, b:{t:'翻一份上市公司季报和行业出货量数据', v:'D'}},
+  {d:'MD', q:'朋友问"现在能买茅台吗"，你的第一反应是……', a:{t:'先想消费降级、居民资产负债表', v:'M'}, b:{t:'先看动销、库存周转、批价走势', v:'D'}},
+  {d:'RG', q:'你的交易决策更像……', a:{t:'一张写满假设、验证、止损位的清单', v:'R'}, b:{t:'看完盘面、新闻、研报之后的一种感觉', v:'G'}},
+  {d:'RG', q:'持仓亏 8%，正好触发预设止损，但你"觉得"快反弹了，你……', a:{t:'该砍砍，规则就是规则', v:'R'}, b:{t:'再等等，我的盘感很少错', v:'G'}},
+  {d:'AC', q:'一笔交易吸引你的，主要是……', a:{t:'潜在收益的空间够大', v:'A'}, b:{t:'最坏情况能承受，下行有限', v:'C'}},
+  {d:'AC', q:'单票仓位上限，你心里的红线是……', a:{t:'看准了可以上 30% 甚至更多', v:'A'}, b:{t:'单票不超过 10%，分散是铁律', v:'C'}},
+  {d:'LS', q:'一个看好的标的，你默认的持有周期是……', a:{t:'3 年起步，最好是一个完整的产业周期', v:'L'}, b:{t:'3 个月以内，赚到目标价就走', v:'S'}},
+  {d:'LS', q:'你打开行情软件的频率是……', a:{t:'一周扫一两次就够，盯太勤反而做错', v:'L'}, b:{t:'一天打开十几次是基本操作', v:'S'}},
+  {d:'MD', q:'判断"宁德时代值不值得买"，你最想先搞清楚……', a:{t:'全球新能源叙事还能讲几年', v:'M'}, b:{t:'单 GWh 净利、出货排产、客户结构', v:'D'}},
+  {d:'RG', q:'朋友推荐了一只票，你的第一动作是……', a:{t:'打开模型/表格，放进自己的框架里跑一遍', v:'R'}, b:{t:'先看 K 线和近期消息，感受一下情绪', v:'G'}},
+  {d:'AC', q:'下面两种年度结果，你更能接受……', a:{t:'收益 +40%，但中间最大回撤 25%', v:'A'}, b:{t:'收益 +12%，最大回撤只有 5%', v:'C'}},
+  {d:'LS', q:'你最享受的"赚钱时刻"是……', a:{t:'持有三年的票兑现时，看着那条复利曲线', v:'L'}, b:{t:'一周之内抓到一波 20% 拉升', v:'S'}},
+  {d:'MD', q:'你更认同哪句话？', a:{t:'看清大势的人，不必精通报表', v:'M'}, b:{t:'魔鬼藏在数据里，宏观都是事后归因', v:'D'}},
+  {d:'RG', q:'交易复盘时，你更愿意承认……', a:{t:'我的体系还有漏洞，规则需要更新', v:'R'}, b:{t:'那天状态不对，盘感失灵了', v:'G'}},
+  {d:'AC', q:'自己一只票连续涨停，你倾向于……', a:{t:'加仓，趋势刚启动', v:'A'}, b:{t:'减仓一部分，落袋为安', v:'C'}},
+  {d:'LS', q:'"时间是好公司的朋友"这句话，你……', a:{t:'深度认同，估值贵一点也认', v:'L'}, b:{t:'听腻了，再好的公司也有买卖区间', v:'S'}}
+];
+
+const TYPES = {
+  MRAL: {n:'全局猎人', t:'拿着望远镜找时代风口，然后坐穿一整个产业周期。', d:'你信奉自上而下：先看清大势，再重仓压时间。研究密度高、出手少，每一枪都想打在五年以后的复利曲线上。最大的敌人是"叙事失效"——当宏观逻辑断了，你需要逼自己止损。'},
+  MRAS: {n:'主题快枪手', t:'叙事一出，子弹上膛；故事讲完，转身就走。', d:'你擅长在主题轮动里抢身位，看到 AI、机器人、降息这种关键词比别人快半拍。理性让你不会恋战，但容易错把"催化剂"当成"基本面"。建议给每个主题事先标好退出条件。'},
+  MRCL: {n:'时代守望者', t:'看清大势之后，宁可少赚，也要拿得稳。', d:'你和"全局猎人"看同一张地图，但仓位更克制、组合更分散。回撤小、夜里睡得着，代价是牛市后段经常踏空。你的护城河是耐心，不是预测准确率。'},
+  MRCS: {n:'宏观狙击手', t:'专门埋伏在叙事破灭的拐点上。', d:'你的兴奋点是"共识开始动摇"那一刻——做空泡沫、抄底恐慌、押注转向。仓位轻、出手准。最大的风险是宏观判断早半年，市场把你抬出去。'},
+  MGAL: {n:'信仰布道者', t:'相信一个故事，就 all in 拿到地老天荒。', d:'你能在大多数人怀疑的时候坚持持有，这是少数人才有的能力。但"信仰"和"路径依赖"只有一线之隔——定期让一个不喜欢这只票的人来挑刺，是你最该有的纪律。'},
+  MGAS: {n:'风口冲浪人', t:'哪里热闹往哪里跑，但腿脚也快。', d:'你对市场情绪极度敏感，靠盘感切换主题。赢的时候非常刺激，输的时候来得也快。你需要的不是更多消息，而是一份"今天为什么不交易"的清单。'},
+  MGCL: {n:'末日先知', t:'总觉得要崩盘，于是把黄金和现金抱了十年。', d:'你天然警觉，看得见别人看不见的尾部风险。问题是"对的太早"等于"错"。建议给悲观仓位也设置时间止损，别让正确的判断变成长期机会成本。'},
+  MGCS: {n:'灵感游击队', t:'跟着感觉来一枪，打完就撤。', d:'你不爱重仓也不爱长持，更像在市场里散步、偶尔出手。心态最健康，但收益曲线偏平。如果想提升，先挑一两个最熟的领域，把"灵感"沉淀成"剧本"。'},
+  DRAL: {n:'模型巴菲特', t:'用数据筛出好公司，然后忘了它。', d:'你把巴菲特的耐心和量化的纪律拼在一起：估值、ROIC、自由现金流跑过模型，买入之后基本不看盘。最适合做养老金式的复利。注意不要因为"模型显示便宜"而忽视行业的结构性变化。'},
+  DRAS: {n:'因子枪手', t:'冷血、高频、统计套利。', d:'你相信"边际胜率 × 高频次"才是真复利。情绪干扰小，但对系统、数据和执行速度依赖极高。一旦因子失效，需要的是迭代速度，不是更深的信念。'},
+  DRCL: {n:'价值守财奴', t:'算清估值才敢下手，宁可错过，绝不买贵。', d:'你是格雷厄姆的精神后裔，安全边际写在脸上。组合长期跑赢通胀很稳，但牛市后半段容易显得"格格不入"。提醒自己：便宜不是唯一的真理，"便宜很久"的公司往往有原因。'},
+  DRCS: {n:'套利工程师', t:'数据缝里捡硬币，单笔小但稳。', d:'你喜欢可转债套利、ETF 折溢价、事件驱动这种"算得清"的机会。回撤极小，缺点是规模上不去、机会越来越卷。建议同时维护 2–3 套不相关的策略。'},
+  DGAL: {n:'财报玄学家', t:'数据看了一堆，最后凭一股劲拿住。', d:'你对数字敏感，但真正下注的瞬间靠的是"这家公司不一样"的直觉。这种组合在抓十倍股时威力惊人。务必给重仓票写一份"我什么时候应该卖"的备忘录，写完锁起来。'},
+  DGAS: {n:'盘口赌神', t:'龙虎榜、分时图，就是你的水晶球。', d:'你能在 K 线和成交明细里读出别人看不到的故事，短线胜率高。但这种能力会随精力衰减。建立"每天最多交易 N 次"的硬约束，比任何指标都重要。'},
+  DGCL: {n:'数据隐士', t:'默默翻数据，悄悄重仓，长期持有。', d:'你不发声、不站队，组合却扎实得吓人。你最大的资产是"不必证明自己"的从容，最大的风险是路径过于隐蔽——找一个能听你说话的人复盘，别把所有判断都关在脑子里。'},
+  DGCS: {n:'K线神算子', t:'不看基本面，技术图形就是一切。', d:'你相信价格反映一切，形态、量能、均线就是世界的语言。短线节奏感强，最大的敌人是"自己说服自己"——同一个图形可以读出多种结论。仓位管理是你唯一不能让步的纪律。'}
+};
+
+const DIMS = [
+  {k:'MD', l:'宏观叙事', r:'微观数据', lv:'M', rv:'D'},
+  {k:'RG', l:'理性模型', r:'直觉盘感', lv:'R', rv:'G'},
+  {k:'AC', l:'进攻冒险', r:'防守稳健', lv:'A', rv:'C'},
+  {k:'LS', l:'长线持有', r:'短线交易', lv:'L', rv:'S'}
+];
+
+let state = { stage:'intro', i:0, ans:Array(QS.length).fill(null) };
+
+function render() {
+  const root = document.getElementById('root');
+  if (state.stage === 'intro') return renderIntro(root);
+  if (state.stage === 'q') return renderQ(root);
+  if (state.stage === 'r') return renderR(root);
+}
+
+function renderIntro(root) {
+  root.innerHTML = `
+    <div class="card intro">
+      <h1>投资人格测试</h1>
+      <p>16 道题，4 个维度，16 种投资者类型。</p>
+      <p>问题都是真实交易场景，没有标准答案——只看你最像哪一种。</p>
+      <p class="meta">大约用时 2 分钟</p>
+      <button class="start" id="go">开始测试</button>
+    </div>`;
+  document.getElementById('go').onclick = () => { state.stage='q'; state.i=0; render(); window.scrollTo(0,0); };
+}
+
+function renderQ(root) {
+  const i = state.i, q = QS[i], sel = state.ans[i];
+  const pct = (i / QS.length) * 100;
+  root.innerHTML = `
+    <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
+    <div class="card">
+      <div class="qn">第 ${i+1} / ${QS.length} 题</div>
+      <div class="qt">${q.q}</div>
+      <button class="opt${sel==='a'?' sel':''}" data-c="a">${q.a.t}</button>
+      <button class="opt${sel==='b'?' sel':''}" data-c="b">${q.b.t}</button>
+      <div class="nav">
+        <button id="prev" ${i===0?'disabled':''}>上一题</button>
+        <button id="next" ${sel===null?'disabled':''}>${i===QS.length-1?'看结果':'下一题'}</button>
+      </div>
+    </div>`;
+  root.querySelectorAll('.opt').forEach(b => b.onclick = e => {
+    state.ans[i] = e.currentTarget.dataset.c;
+    setTimeout(() => {
+      if (i < QS.length - 1) { state.i++; } else { state.stage='r'; }
+      render();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }, 200);
+  });
+  document.getElementById('prev').onclick = () => { if (state.i>0) { state.i--; render(); window.scrollTo(0,0); } };
+  document.getElementById('next').onclick = () => {
+    if (state.ans[i] === null) return;
+    if (i < QS.length - 1) { state.i++; } else { state.stage='r'; }
+    render();
+    window.scrollTo({top:0, behavior:'smooth'});
+  };
+}
+
+function score() {
+  const s = {M:0,D:0,R:0,G:0,A:0,C:0,L:0,S:0};
+  state.ans.forEach((c, idx) => {
+    if (!c) return;
+    const q = QS[idx];
+    const v = c === 'a' ? q.a.v : q.b.v;
+    s[v]++;
+  });
+  return s;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+function renderR(root) {
+  const s = score();
+  const code = (s.M>=s.D?'M':'D') + (s.R>=s.G?'R':'G') + (s.A>=s.C?'A':'C') + (s.L>=s.S?'L':'S');
+  const t = TYPES[code];
+  const dimsHtml = DIMS.map(dim => {
+    const lc = s[dim.lv], rc = s[dim.rv], total = lc + rc;
+    const lp = total ? (lc/total)*100 : 50;
+    const leftWins = lc >= rc;
+    const fillWidth = Math.abs(lp - 50);
+    const fillLeft = leftWins ? (50 - fillWidth) : 50;
+    return `
+      <div class="drow">
+        <div class="dl ${leftWins?'act':''}">${dim.l}</div>
+        <div class="dbar"><div class="dfill" style="left:${fillLeft}%;width:${fillWidth}%"></div></div>
+        <div class="dr ${!leftWins?'act':''}">${dim.r}</div>
+      </div>`;
+  }).join('');
+  root.innerHTML = `
+    <div class="card">
+      <div class="code">${code}</div>
+      <div class="rname">${t.n}</div>
+      <div class="rtag">${t.t}</div>
+      <div class="stitle">你的四个维度</div>
+      ${dimsHtml}
+      <div class="stitle">详细解读</div>
+      <div class="desc">${t.d}</div>
+      <div class="actions">
+        <button class="primary" id="share">分享给朋友</button>
+        <button id="restart">重新测试</button>
+      </div>
+    </div>`;
+  document.getElementById('share').onclick = async () => {
+    const text = `我的投资人格是 ${code} · ${t.n}\n${t.t}\n来测测你是哪一种 →`;
+    const url = window.location.href;
+    if (navigator.share) {
+      try { await navigator.share({title:'投资人格测试', text, url}); } catch(e) {}
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${text}\n${url}`);
+        showToast('结果和链接已复制');
+      } catch(e) {
+        showToast('请手动复制浏览器地址');
+      }
+    }
+  };
+  document.getElementById('restart').onclick = () => {
+    state = { stage:'intro', i:0, ans:Array(QS.length).fill(null) };
+    render();
+    window.scrollTo(0,0);
+  };
+}
+
+render();
+</script>
+</body>
+</html>
